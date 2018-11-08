@@ -4,20 +4,27 @@ var utilities = require('./utilities'),
     htmlDecode = require('js-htmlencode').htmlDecode,
     log = require('./log');
 
-module.exports = function(args) {
+module.exports = function(args, payload) {
+    var modifier = 0;
+
     var m = args[0].toLowerCase();
     if (m === "enc"){
     	m = "encode";
     } else if (m === "dec"){
     	m = "decode";
     }
-    var payload = args[1];
-    var mod1 = args[2];
+    if (payload){
+        modifier = -1;
+    } else {
+        var payload = args[1];    
+    }
+    
+    var mod1 = args[2+modifier];
 
-    var mod2 = args[3];
+    var mod2 = args[3+modifier];
     var method;
 
-    if (parseInt(mod1[mod1.length-1]) && mod1 != "base64" && mod1 != "md5" && mod1 != "sha1" && mod1 != "sha256"){
+    if (parseInt(mod1[mod1.length-1]) && mod1 != "base64" && mod1 != "b64" && mod1 != "md5" && mod1 != "sha1" && mod1 != "sha256"){
     	mod2 = mod1[mod1.length-1];
     	mod1 = mod1[0];
     }
@@ -56,6 +63,9 @@ module.exports = function(args) {
             break;
         case "m": case "md5":
             method = utilities.md5;
+            break;
+        case "e": case "esc": case "escaped":
+            method = utilities.escapedHex;
             break;
         case "sha1":
             method = utilities.sha1;

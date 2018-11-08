@@ -1,5 +1,32 @@
 # ChangeLog
 
+## 1.4.4 _(May 18, 2018)_
+- Bug Fixes
+    - Fixed a couple of bugs in the encoder module
+
+## 1.4.3 _(Jan 20, 2018)_
+
+- Enhancement
+  - Added a verbose mode to bros http ```bros http -v``` so that you can view all headers and the body of an incoming request.
+- Other
+  - Fix for a bug that was introduced in 1.4.2 that broke the encoder module... ugh sorry ;/
+
+## 1.4.2 _(Jan 9, 2018)_
+
+- Enhancement
+  - Added the ability to pipe into to the cli bros encoder and output as an escaped string
+    - Options: ```bros enc esc``` ```bros enc e``` ```bros enc escaped```
+    - Ex: ```printf Brosec | bros enc escaped``` = ```\x42\x72\x6f\x73\x65\x63```  
+- Other
+  - Misc other fixes and optimizations.. no longer using colorized output to allow for better cli usage
+
+## 1.4.1 _(Sept 25, 2017)_
+
+- Enhancement
+  - Added the ability to pipe input to bros encoder when used in headless mode (bros encoder terminal mode currently isnt supported)
+    - Ex: ``` cat payload.txt | bros encode url ```
+    - Ex: ``` bros enc url < some_file.txt ```
+
 ## 1.3.0.3 _(June 30, 2017)_
 
 - Enhancement
